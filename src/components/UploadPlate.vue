@@ -44,6 +44,7 @@ import { ElMessage } from 'element-plus';
 import api from '@/api';
 
 export default {
+    name: 'UploadPlate',
   setup() {
     const fileList = ref([]);
     const uploadedImageUrl = ref(null);
