@@ -13,7 +13,7 @@
         <el-upload
           class="upload-demo"
           drag
-          :on-change="handleFileUpload"
+          :http-request="handleFileUpload"
           :file-list="fileList"
           :on-remove="handleRemove"
           :auto-upload="false"
@@ -60,9 +60,7 @@ export default {
     });
 
     const handleFileUpload = (file) => {
-      // 将新文件追加到现有文件列表中
-      fileList.value.push(file);
-      console.log('File uploaded:', file);
+      fileList.value = [file];
     };
 
     const handleRemove = () => {
@@ -81,25 +79,22 @@ export default {
     };
 
     const submitPlate = async () => {
-      console.log('FileList:', fileList.value);
-      if (fileList.value.length === 0) {
+      if (fileList.value.length > 0) {
+        const formData = new FormData();
+        formData.append('pics', fileList.value[0].raw);
+        ElMessage.info('文件上传中...');
+        try {
+          const { data } = await api.getPlateData(formData);
+          uploadedImageUrl.value = URL.createObjectURL(fileList.value[0].raw);
+          resultData.value = data;
+          ElMessage.success('识别结果已接收！');
+          console.log('Response from backend:', data);
+        } catch (error) {
+          ElMessage.error('识别结果接收失败，请重试');
+          console.error('上传过程中发生错误:', error);
+        }
+      } else {
         ElMessage.warning('请先上传文件');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('pics', fileList.value[0].raw);
-
-      ElMessage.info('文件上传中...');
-      try {
-        const { data } = await api.getPlateData(formData);
-        uploadedImageUrl.value = URL.createObjectURL(fileList.value[0].raw);
-        resultData.value = data;
-        ElMessage.success('识别结果已接收！');
-        console.log('Response from backend:', data);
-      } catch (error) {
-        ElMessage.error('识别结果接收失败，请重试');
-        console.error('上传过程中发生错误:', error);
       }
     };
 
