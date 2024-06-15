@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-      <router-view></router-view>
+    <UploadPlate />
   </div>
 </template>
 
 <script>
+import UploadPlate from './components/UploadPlate.vue';
+
 export default {
   name: 'App',
-  mounted() {
-      this.$router.replace({
-          name: "MainPage",
-      });
-  }
+  components: {
+    UploadPlate,
+  },
 };
 </script>
 
