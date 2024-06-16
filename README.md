@@ -1,5 +1,7 @@
 # licenseplate-recognition
 
+![](src/assets/前端展示.png)
+
 ## Project setup
 ```
 npm install
