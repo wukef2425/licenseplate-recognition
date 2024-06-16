@@ -12,7 +12,7 @@ export default {
       });
       return response.data;
     } catch (error) {
-      console.error('There was an error!', error);
+      console.error('济识科技：There was an error!', error);
     }
   },
 };
