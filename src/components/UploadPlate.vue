@@ -1,6 +1,6 @@
 <template>
     <div class="fullscreen-div" v-if="!this.is_show">
-        <img src="@/assets/background.png" alt="A Fullscreen Image">
+        <img src="@/assets/background.jpg" alt="A Fullscreen Image">
     </div>
     <button class="enter_button" @click="enter" v-if="!this.is_show">
         Enter
@@ -226,8 +226,8 @@ export default {
 }
 .enter_button {
     position: relative;
-    margin-top: 80vh;
-    margin-left: 75vh;
+    margin-top: 60vh;
+    margin-left: 80vh;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     padding-block: 1rem; /* 增加内边距高度 */
